@@ -14,3 +14,14 @@ Parse.Cloud.define('getMessagesForUser', function(request, response) {
       response.success(messages);
     });
 });
+
+Parse.Cloud.define('getTotalMessageCount', function(request, response) {
+
+  // Parse.Cloud.useMasterKey() <-- no longer available!
+
+  var query = new Parse.Query('Messages');
+  query.count({ useMasterKey: true }) // count() will use the master key to bypass ACLs
+    .then(function(count) {
+      response.success(count);
+    });
+});
