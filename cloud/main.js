@@ -39,7 +39,6 @@ Parse.Cloud.beforeSave(Parse.User, function(request, response) {
 								 user.setEmail(email, {});
 								 user.save();
 								},error: function(httpResponse) {
-									console.log('error');
     							}
 								});
 	} 
