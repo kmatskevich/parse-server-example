@@ -25,3 +25,23 @@ Parse.Cloud.define('getTotalMessageCount', function(request, response) {
       response.success(count);
     });
 });
+
+Parse.Cloud.beforeSave(Parse.User, function(request, response) {
+var user = request.object;
+if (request.object.get('authData') != {}){
+    var fb_auth = request.object.get('authData')['facebook'];
+    var email;          
+    Parse.Cloud.httpRequest({
+method: "GET",
+url: "https://graph.facebook.com/" + fb_auth['id'] + "?access_token=" + fb_auth['access_token'],
+    success: function(httpResponse) {
+        email = httpResponse.data['email'];
+        Parse.Cloud.useMasterKey();
+        user.setEmail(email, {});
+        user.save();
+},
+error: function(httpResponse) {
+        console.log('error');
+    }
+});
+} 
