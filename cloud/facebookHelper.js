@@ -13,10 +13,11 @@ exports.loadDataFromFacebook = function(request, responce){
                 console.log(httpResponse.data.name);
                 console.log(httpResponse.data.email);
                 console.log(httpResponse.data.username);
-                res.success(httpResponse.data.name + httpResponse.data.email + httpResponse.data.username);
+                res.success(httpResponse);
             },
             error:function(httpResponse){
                 console.error(httpResponse);
+                res.error(httpResponse);
             }
         });
     }else{
