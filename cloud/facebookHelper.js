@@ -1,4 +1,4 @@
-Parse.cloude.define("loadDataFromFacebook", function(request, responce)){
+var loadDataFromFacebook = function(request, responce){
 	var user = request.user; 
 	var accessToken = user.get('authData')['facebook']['access_token'];
 	
@@ -15,4 +15,7 @@ Parse.cloude.define("loadDataFromFacebook", function(request, responce)){
             }
         });
     }
+
 }
+
+module.exports = facebookHelper;
