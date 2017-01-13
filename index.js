@@ -1,6 +1,8 @@
 // Example express application adding the parse-server module to expose Parse
 // compatible API routes.
 
+require('/cloud/facebookHelper.js');
+
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
