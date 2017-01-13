@@ -9,9 +9,7 @@ console.log('loadDataFromFacebook start')
 	}
 	var accessToken = user.get('authData')['facebook']['access_token'];
 	
-	if (Parse.FacebookUtils.isLinked(user)) {
-		
-		Parse.Cloud.httpRequest({
+	Parse.Cloud.httpRequest({
 		url: 'https://graph.facebook.com/me?fields=email,name,username&access_token=' + user.get('authData').facebook.access_token
 		}).then(function(httpResponse) {
 			// success
@@ -22,10 +20,6 @@ console.log('loadDataFromFacebook start')
 			console.error('Request failed with response code ' + httpResponse.status);
 			res.error(httpResponse);
 		});
-    }else{
-	    console.log(user.name + 'not linked');
-	    res.success('user not linked');
-    }
 
 });
 
