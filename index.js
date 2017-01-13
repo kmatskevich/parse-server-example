@@ -5,6 +5,7 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
+process.env.VERBOSE = true;
 
 require(path.join(__dirname, '/cloud/facebookHelper.js'));
 
