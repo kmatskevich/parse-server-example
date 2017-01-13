@@ -1,4 +1,5 @@
 exports.loadDataFromFacebook = function(request, responce){
+	console.log('loadDataFromFacebook start')
 	var user = request.user; 
 	if(user != nil){
 		console.log(user.name + 'come to the function');

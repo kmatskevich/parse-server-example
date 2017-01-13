@@ -5,6 +5,7 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
+
 require(path.join(__dirname, '/cloud/facebookHelper.js'));
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
@@ -18,7 +19,7 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'myAppId',
   verbose: true,
-  oauth: {
+  auth: {
    facebook: {
      appIds: "841447519321843"
    }
