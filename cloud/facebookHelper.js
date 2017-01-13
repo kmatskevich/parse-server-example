@@ -17,5 +17,3 @@ exports.loadDataFromFacebook = function(request, responce){
     }
 
 }
-
-module.exports = facebookHelper;
