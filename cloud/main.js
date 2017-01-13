@@ -1,8 +1,7 @@
-require('./facebookHelper');
+var facebookHelper = require('./facebookHelper');
 
-Parse.Cloud.define('hello', function(req, res) {
-	console.log('Hi!');
-    res.success('Hi');
+Parse.Cloud.define('collectDataFromFacebook', function(req, res) {
+	facebookHelper.loadDataFromFacebook(req, res);
 });
 
 Parse.Cloud.define('getMessagesForUser', function(request, response) {

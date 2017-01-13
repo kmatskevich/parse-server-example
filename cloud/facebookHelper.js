@@ -26,7 +26,3 @@ exports.loadDataFromFacebook = function(request, responce){
 
 }
 
-Parse.Cloud.define('helloFacebook', function(req, res) {
-	console.log('Hello Facebook!');
-    res.success('Hello Facebook');
-});
