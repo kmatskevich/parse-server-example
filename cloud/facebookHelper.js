@@ -1,5 +1,8 @@
 exports.loadDataFromFacebook = function(request, responce){
 	var user = request.user; 
+	if(user != nil){
+		console.log(user.name + 'come to the function');
+	}
 	var accessToken = user.get('authData')['facebook']['access_token'];
 	
 	if (Parse.FacebookUtils.isLinked(user)) {
@@ -14,6 +17,8 @@ exports.loadDataFromFacebook = function(request, responce){
                 console.error(httpResponse);
             }
         });
+    }else{
+	    console.log(user.name + 'not linked');
     }
 
 }
