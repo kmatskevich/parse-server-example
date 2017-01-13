@@ -4,9 +4,7 @@ Parse.Cloud.define('collectDataFromFacebook', function(req, res) {
 	// 	facebookHelper.loadDataFromFacebook(req, res);
 	console.log('loadDataFromFacebook start')
 	var user = req.user; 
-	if(user != nil){
-		console.log(user.name + 'come to the function');
-	}
+	console.log(user.name + 'come to the function');
 	var accessToken = user.get('authData')['facebook']['access_token'];
 	
 	Parse.Cloud.httpRequest({
