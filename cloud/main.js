@@ -1,7 +1,8 @@
 require('./facebookHelper');
 
 Parse.Cloud.define('hello', function(req, res) {
-  res.success('Hi');
+	console.log('Hi!');
+    res.success('Hi');
 });
 
 Parse.Cloud.define('getMessagesForUser', function(request, response) {
