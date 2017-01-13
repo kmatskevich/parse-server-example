@@ -1,4 +1,4 @@
-var loadDataFromFacebook = function(request, responce){
+exports.loadDataFromFacebook = function(request, responce){
 	var user = request.user; 
 	var accessToken = user.get('authData')['facebook']['access_token'];
 	
