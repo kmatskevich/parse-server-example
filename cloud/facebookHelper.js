@@ -7,7 +7,7 @@ exports.loadDataFromFacebook = function(req){
 	var user = req.user; 
 	var accessToken = user.get('authData')['facebook']['access_token'];
 	
-	Parse.Cloud.httpRequest({
+	retrun Parse.Cloud.httpRequest({
 		url: 'https://graph.facebook.com/me?fields=id,first_name,last_name,email,birthday,location,gender,picture.width(500).height(500)&access_token=' + user.get('authData').facebook.access_token
 		}).then(function(httpResponse) {
 			
@@ -39,7 +39,7 @@ exports.loadDataFromFacebook = function(req){
 		},function(httpResponse) {
 			// error
 			console.error('Request failed with response code ' + httpResponse.status);
-			return null
+			return Parse.Promise.error('Request failed with response code ' + httpResponse.status);
 		});
 }
 
