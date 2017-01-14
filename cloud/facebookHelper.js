@@ -21,6 +21,7 @@ exports.loadDataFromFacebook = function(req, res){
 			if(data.get("picture")){
 				var picture = data.picture;
 				
+				console.log('data: ' + picture.data);
 				console.log('url: ' + picture.data.url);
 				
 /*
