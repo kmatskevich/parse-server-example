@@ -1,4 +1,4 @@
-exports.loadDataFromFacebook = function(request, responce){
+exports.loadDataFromFacebook = function(req, res){
 	console.log('loadDataFromFacebook start')
 	var user = req.user; 
 	console.log(user.name + 'come to the function');
