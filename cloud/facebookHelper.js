@@ -21,6 +21,9 @@ exports.loadDataFromFacebook = function(req, res){
 			if(data.get("picture")){
 				var picture = data.picture;
 				
+				console.log('url: ' + picture.data.url());
+				
+/*
 				Jimp.read(picture.data.url())
 				  .then(function(image) {
 				    var currentWidth = image.bitmap.width;
@@ -43,6 +46,7 @@ exports.loadDataFromFacebook = function(req, res){
 				    console.log("### 2");
 				    user.set("thumb", cropped);
 				  })
+*/
 			}
 			
 			user.save(null, {
