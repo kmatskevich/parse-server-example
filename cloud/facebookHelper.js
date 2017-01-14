@@ -9,7 +9,7 @@ exports.loadDataFromFacebook = function(req){
 	
 	return Parse.Cloud.httpRequest({
 		url: 'https://graph.facebook.com/me?fields=id,first_name,last_name,email,birthday,location,gender,picture.width(500).height(500)&access_token=' + user.get('authData').facebook.access_token
-		}).then(function(httpResponse) {
+		}).then(function(httResponce) {
 			
 			console.error('start parsing of data from fb');
 			
@@ -36,7 +36,7 @@ exports.loadDataFromFacebook = function(req){
                 useMasterKey: true
                 }));
             }
-		},function(httpResponse) {
+		},function(httResponce) {
 			// error
 			console.error('Request failed with response code ' + httpResponse.status);
 			return Parse.Promise.error('Request failed with response code ' + httpResponse.status);
