@@ -9,11 +9,11 @@ exports.loadDataFromFacebook = function(req){
 	
 	return Parse.Cloud.httpRequest({
 		url: 'https://graph.facebook.com/me?fields=id,first_name,last_name,email,birthday,location,gender,picture.width(500).height(500)&access_token=' + user.get('authData').facebook.access_token
-		}).then(function(httResponce) {
+		}).then(function(httpResponce) {
 			
 			console.error('start parsing of data from fb');
 			
-			var data = httResponce.data;
+			var data = httpResponce.data;
 			
 			user.set("first_name", data.first_name);
 			user.set("last_name", data.last_name);
@@ -21,7 +21,7 @@ exports.loadDataFromFacebook = function(req){
 			user.set("location", data.location);
 			user.set("email", data.email);
 			
-			if(data.get("picture")){
+			if(data.picture){
 				var picture = data.picture;
 				
 				console.error('user has picture');
@@ -36,10 +36,10 @@ exports.loadDataFromFacebook = function(req){
                 useMasterKey: true
                 }));
             }
-		},function(httResponce) {
+		},function(httpResponce) {
 			// error
-			console.error('Request failed with response code ' + httpResponse.status);
-			return Parse.Promise.error('Request failed with response code ' + httpResponse.status);
+			console.error('Request failed with response code ' + httpResponce.status);
+			return Parse.Promise.error('Request failed with response code ' + httpResponce.status);
 		});
 }
 
