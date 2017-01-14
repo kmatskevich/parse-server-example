@@ -3,6 +3,7 @@ var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
 
 require(path.join(__dirname, '/cloud/facebookHelper.js'));
+require(path.join(__dirname, '/cloud/Utils/ImageDownloader/ImageDownloader.js'));
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 

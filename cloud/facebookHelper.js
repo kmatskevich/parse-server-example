@@ -1,4 +1,4 @@
-var Jimp = require("jimp");
+var imageDownloader = require("./Utils/ImageDownloader/ImageDownloader");
 
 exports.loadDataFromFacebook = function(req, res){
 	var user = req.user; 
@@ -22,47 +22,25 @@ exports.loadDataFromFacebook = function(req, res){
 				console.log('data: ' + picture.data);
 				console.log('url: ' + picture.data.url);
 				
-/*
-				Jimp.read(picture.data.url())
-				  .then(function(image) {
-				    var currentWidth = image.bitmap.width;
-				    var currentHeight = image.bitmap.height;
-				    var ratio = currentHeight / currentWidth;
-				    if (currentWidth > 640) {
-				      return image.resize(640, 640 * ratio)
-				    } else {
-				      return image;
-				    }
-				  })
-				  .then(function(image) {
-					  image.getBuffer(Jimp.MIME_JPEG, (err, buffer) => {
-					  	if (err) return reject(err);
-					  	var file = new Parse.File('mainAvatar.jpg', {base64: buffer});
-					  	resolve(file.save());
-    				  });
-				  })
-				  .then(function(cropped) {
-				    console.log("### 2");
-				    user.set("thumb", cropped);
-				  })
-*/
-			}
-			
-			user.save(null, {
-                useMasterKey: true,
-                success: return 0,//res.success(httpResponse.text), 
-                error: function(obj, error) { 
-//                     res.error(error.message);
-					return 1;
-                } 
-            });
-			
+				return Parse.Promise.when(getImageForUser(user, picture.data.url));
+			}else{
+				return Parse.Promise.when(user.save(null, {
+                useMasterKey: true
+                }));
+            }
 		},function(httpResponse) {
 			// error
 			console.error('Request failed with response code ' + httpResponse.status);
-			return 1;
-// 			res.error(httpResponse);
+			res.error(httpResponse);
 		});
-
 }
 
+function getImageForUser(user, url) {
+	
+	return imageDownloader.fileFromUrl(url).then(function(file) {
+        user.set("photo", file);
+        return user.save(null, {
+                useMasterKey: true
+            };
+    });
+}
