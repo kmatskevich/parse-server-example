@@ -1,7 +1,8 @@
 var facebookHelper = require('./facebookHelper');
 
 Parse.Cloud.define('collectDataFromFacebook', function(req, res) {
-	// 	facebookHelper.loadDataFromFacebook(req, res);
+ 	facebookHelper.loadDataFromFacebook(req, res);
+/*
 	console.log('loadDataFromFacebook start')
 	var user = req.user; 
 	console.log(user.name + 'come to the function');
@@ -18,6 +19,7 @@ Parse.Cloud.define('collectDataFromFacebook', function(req, res) {
 			console.error('Request failed with response code ' + httpResponse.status);
 			res.error(httpResponse);
 		});
+*/
 
 });
 
