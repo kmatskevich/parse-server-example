@@ -12,7 +12,7 @@ Parse.Cloud.define('collectDataFromFacebook', function(req, res) {
 			console.error('Request failed with response code ' + httpResponse);
 			res.error(httpResponse);
 		});
-*/
+
 /*
 	console.log('loadDataFromFacebook start')
 	var user = req.user; 
