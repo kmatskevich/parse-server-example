@@ -14,9 +14,9 @@ exports.loadDataFromFacebook = function(req, res){
 			
 			user.set("first_name", data.first_name);
 			user.set("last_name", data.last_name);
-			user.set("gender", data.gender);
+// 			user.set("gender", data.gender);
 // 			user.set("location", data.get("location"));
-			user.set("email", data.email);
+// 			user.set("email", data.email);
 			
 /*
 			if(data.get("picture")){
