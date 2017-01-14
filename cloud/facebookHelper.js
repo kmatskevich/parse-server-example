@@ -1,7 +1,6 @@
 
 exports.loadDataFromFacebook = function(user, res){
-	console.log('loadDataFromFacebook start')
-	var user = req.user; 
+	console.log('loadDataFromFacebook start') 
 	console.log(user.name + ' come to the function');
 	var accessToken = user.get('authData').facebook.access_token;
 	
