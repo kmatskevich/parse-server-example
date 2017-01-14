@@ -21,7 +21,7 @@ exports.loadDataFromFacebook = function(req, res){
 			if(data.get("picture")){
 				var picture = data.picture;
 				
-				console.log('url: ' + picture.data.url());
+				console.log('url: ' + picture.data.url);
 				
 /*
 				Jimp.read(picture.data.url())
