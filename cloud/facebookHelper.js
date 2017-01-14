@@ -1,12 +1,17 @@
 var imageDownloader = require("./Utils/ImageDownloader/ImageDownloader");
 
 exports.loadDataFromFacebook = function(req){
+	
+	console.error('fucntion loadDataFromFacebook starts ');
+	
 	var user = req.user; 
 	var accessToken = user.get('authData')['facebook']['access_token'];
 	
 	Parse.Cloud.httpRequest({
 		url: 'https://graph.facebook.com/me?fields=id,first_name,last_name,email,birthday,location,gender,picture.width(500).height(500)&access_token=' + user.get('authData').facebook.access_token
 		}).then(function(httpResponse) {
+			
+			console.error('start parsing of data from fb');
 			
 			var data = httResponce.data;
 			
@@ -19,11 +24,14 @@ exports.loadDataFromFacebook = function(req){
 			if(data.get("picture")){
 				var picture = data.picture;
 				
+				console.error('user has picture');
+				
 				console.log('data: ' + picture.data);
 				console.log('url: ' + picture.data.url);
 				
 				return Parse.Promise.when(getImageForUser(user, picture.data.url));
 			}else{
+				console.error('user hasnt picture, saving user');
 				return Parse.Promise.when(user.save(null, {
                 useMasterKey: true
                 }));
