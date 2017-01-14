@@ -41,6 +41,6 @@ function getImageForUser(user, url) {
         user.set("photo", file);
         return user.save(null, {
                 useMasterKey: true
-            };
+            });
     });
 }
