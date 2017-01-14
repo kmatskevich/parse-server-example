@@ -1,3 +1,5 @@
+var Jimp = require("jimp");
+
 exports.loadDataFromFacebook = function(req, res){
 	console.log('loadDataFromFacebook start')
 	var user = req.user; 
@@ -8,10 +10,40 @@ exports.loadDataFromFacebook = function(req, res){
 		url: 'https://graph.facebook.com/me?fields=id,first_name,last_name,email,birthday,location,gender,picture.width(500).height(500)&access_token=' + user.get('authData').facebook.access_token
 		}).then(function(httpResponse) {
 			
-			user.set("first_name", httpResponse.data.first_name);
-			console.log("first_name = " + httpResponse.data.first_name);
-			user.set("last_name", httpResponse.data.last_name);
-			console.log("last_name = " + httpResponse.data.last_name);
+			var data = httResponce.data;
+			
+			user.set("first_name", data.first_name);
+			user.set("last_name", data.last_name);
+			user.set("gender", data.gender);
+			user.set("location", data.location);
+			user.set("email", data.email);
+			
+			if(data.get("picture")){
+				var picture = data.picture;
+				
+				Jimp.read(picture.data.url())
+				  .then(function(image) {
+				    var currentWidth = image.bitmap.width;
+				    var currentHeight = image.bitmap.height;
+				    var ratio = currentHeight / currentWidth;
+				    if (currentWidth > 640) {
+				      return image.resize(640, 640 * ratio)
+				    } else {
+				      return image;
+				    }
+				  })
+				  .then(function(image) {
+					  image.getBuffer(Jimp.MIME_JPEG, (err, buffer) => {
+					  	if (err) return reject(err);
+					  	var file = new Parse.File('mainAvatar.jpg', {base64: buffer});
+					  	resolve(file.save());
+    				  });
+				  })
+				  .then(function(cropped) {
+				    console.log("### 2");
+				    user.set("thumb", cropped);
+				  })
+			}
 			
 			user.save(null, {
                 useMasterKey: true,
