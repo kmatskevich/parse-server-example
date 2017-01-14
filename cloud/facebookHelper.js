@@ -50,16 +50,18 @@ exports.loadDataFromFacebook = function(req, res){
 			
 			user.save(null, {
                 useMasterKey: true,
-                success: res.success(httpResponse.text), 
+                success: return 0,//res.success(httpResponse.text), 
                 error: function(obj, error) { 
-                    res.error(error.message);
+//                     res.error(error.message);
+					return 1;
                 } 
             });
 			
 		},function(httpResponse) {
 			// error
 			console.error('Request failed with response code ' + httpResponse.status);
-			res.error(httpResponse);
+			return 1;
+// 			res.error(httpResponse);
 		});
 
 }
