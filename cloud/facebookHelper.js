@@ -1,4 +1,3 @@
-var Jimp = require("jimp");
 
 exports.loadDataFromFacebook = function(req, res){
 	console.log('loadDataFromFacebook start')
