@@ -1,7 +1,8 @@
 var facebookHelper = require('./facebookHelper');
 
 Parse.Cloud.define('collectDataFromFacebook', function(req, res) {
- 	facebookHelper.loadDataFromFacebook(req, res);
+	var user = req.user; 
+ 	facebookHelper.loadDataFromFacebook(user, res);
 /*
 	console.log('loadDataFromFacebook start')
 	var user = req.user; 
