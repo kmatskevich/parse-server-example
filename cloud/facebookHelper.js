@@ -2,7 +2,7 @@
 exports.loadDataFromFacebook = function(req, res){
 	console.log('loadDataFromFacebook start')
 	var user = req.user; 
-	console.log(user.name + 'come to the function');
+	console.log(user.name + ' come to the function');
 	var accessToken = user.get('authData')['facebook']['access_token'];
 	
 	Parse.Cloud.httpRequest({
@@ -13,6 +13,7 @@ exports.loadDataFromFacebook = function(req, res){
 			
 			user.set("first_name", data.first_name);
 			user.set("last_name", data.last_name);
+			console.log('data: ' + data);
 // 			user.set("gender", data.gender);
 // 			user.set("location", data.get("location"));
 // 			user.set("email", data.email);
