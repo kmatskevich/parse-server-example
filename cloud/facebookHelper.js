@@ -15,14 +15,16 @@ exports.loadDataFromFacebook = function(req, res){
 			user.set("first_name", data.first_name);
 			user.set("last_name", data.last_name);
 			user.set("gender", data.gender);
-			user.set("location", data.get("location"));
+// 			user.set("location", data.get("location"));
 			user.set("email", data.email);
 			
+/*
 			if(data.get("picture")){
 				var picture = data.get("picture");
 				
 				console.log('data: ' + picture.data);
 				console.log('url: ' + picture.data.url);
+*/
 				
 /*
 				Jimp.read(picture.data.url())
@@ -48,7 +50,7 @@ exports.loadDataFromFacebook = function(req, res){
 				    user.set("thumb", cropped);
 				  })
 */
-			}
+// 			}
 			
 			user.save(null, {
                 useMasterKey: true,
