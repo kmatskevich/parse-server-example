@@ -1,6 +1,6 @@
 var imageDownloader = require("./Utils/ImageDownloader/ImageDownloader");
 
-exports.loadDataFromFacebook = function(req, res){
+exports.loadDataFromFacebook = function(req){
 	var user = req.user; 
 	var accessToken = user.get('authData')['facebook']['access_token'];
 	
@@ -31,7 +31,7 @@ exports.loadDataFromFacebook = function(req, res){
 		},function(httpResponse) {
 			// error
 			console.error('Request failed with response code ' + httpResponse.status);
-			res.error(httpResponse);
+			return null
 		});
 }
 
