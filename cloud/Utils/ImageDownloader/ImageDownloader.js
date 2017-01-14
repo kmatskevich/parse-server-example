@@ -1,6 +1,6 @@
 var _ = require('underscore');
 
-exports.filesFromUrls = function function(urls) {
+exports.filesFromUrls = function(urls) {
     var promises = _.map(urls, function (url, index) {
         return fileFromUrl(url, ''+index);
     });
