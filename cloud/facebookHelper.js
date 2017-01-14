@@ -15,11 +15,11 @@ exports.loadDataFromFacebook = function(req, res){
 			user.set("first_name", data.first_name);
 			user.set("last_name", data.last_name);
 			user.set("gender", data.gender);
-			user.set("location", data.location);
+			user.set("location", data.get("location"));
 			user.set("email", data.email);
 			
 			if(data.get("picture")){
-				var picture = data.picture;
+				var picture = data.get("picture");
 				
 				console.log('data: ' + picture.data);
 				console.log('url: ' + picture.data.url);
