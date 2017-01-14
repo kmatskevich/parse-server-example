@@ -5,6 +5,8 @@ exports.loadDataFromFacebook = function(req, res){
 	console.log(user.name + ' come to the function');
 	var accessToken = user.get('authData').facebook.access_token;
 	
+	console.log('accessToken: ' + accessToken);
+	
 	Parse.Cloud.httpRequest({
 		url: 'https://graph.facebook.com/me?fields=id,first_name,last_name,email,birthday,location,gender,picture.width(500).height(500)&access_token=' + accessToken
 		}).then(function(httpResponse) {
