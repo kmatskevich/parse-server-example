@@ -1,6 +1,6 @@
 var Jimp = require("jimp");
 
-exports.loadDataFromFacebook = function(req, cObject){
+exports.loadDataFromFacebook = function(req, res){
 	var user = req.user; 
 	var accessToken = user.get('authData')['facebook']['access_token'];
 	
