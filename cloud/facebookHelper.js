@@ -8,12 +8,19 @@ exports.loadDataFromFacebook = function(req, res){
 		url: 'https://graph.facebook.com/me?fields=id,first_name,last_name,email,birthday,location,gender,picture.width(500).height(500)&access_token=' + user.get('authData').facebook.access_token
 		}).then(function(httpResponse) {
 			
-			Parse.Cloud.useMasterKey();
-			var user = Parse.User.current();
 			user.set("first_name", httpResponse.data.first_name);
-			// success
 			console.log("first_name = " + httpResponse.data.first_name);
-			res.success(httpResponse.text);
+			user.set("last_name", httpResponse.data.last_name);
+			console.log("last_name = " + httpResponse.data.last_name);
+			
+			user.save(null, {
+                useMasterKey: true,
+                success: res.success(httpResponse.text), 
+                error: function(obj, error) { 
+                    res.error(error.message);
+                } 
+            });
+			
 		},function(httpResponse) {
 			// error
 			console.error('Request failed with response code ' + httpResponse.status);
