@@ -1,33 +1,26 @@
+var Jimp = require("jimp");
 
-exports.loadDataFromFacebook = function(user, res){
-	console.log('loadDataFromFacebook start') 
-	console.log(user.name + ' come to the function');
-	var accessToken = user.get('authData').facebook.access_token;
-	
-	console.log('accessToken: ' + accessToken);
-	
-	console.log('request: ' + 'https://graph.facebook.com/me?fields=id,first_name,last_name,email,birthday,location,gender,picture.width(500).height(500)&access_token=' + accessToken);
+exports.loadDataFromFacebook = function(req, cObject){
+	var user = req.user; 
+	var accessToken = user.get('authData')['facebook']['access_token'];
 	
 	Parse.Cloud.httpRequest({
-		url: 'https://graph.facebook.com/me?fields=id,first_name,last_name,email,birthday,location,gender,picture.width(500).height(500)&access_token=' + accessToken
+		url: 'https://graph.facebook.com/me?fields=id,first_name,last_name,email,birthday,location,gender,picture.width(500).height(500)&access_token=' + user.get('authData').facebook.access_token
 		}).then(function(httpResponse) {
 			
 			var data = httResponce.data;
 			
 			user.set("first_name", data.first_name);
 			user.set("last_name", data.last_name);
-			console.log('data: ' + data);
-// 			user.set("gender", data.gender);
-// 			user.set("location", data.get("location"));
-// 			user.set("email", data.email);
+			user.set("gender", data.gender);
+			user.set("location", data.location);
+			user.set("email", data.email);
 			
-/*
 			if(data.get("picture")){
-				var picture = data.get("picture");
+				var picture = data.picture;
 				
 				console.log('data: ' + picture.data);
 				console.log('url: ' + picture.data.url);
-*/
 				
 /*
 				Jimp.read(picture.data.url())
@@ -53,11 +46,11 @@ exports.loadDataFromFacebook = function(user, res){
 				    user.set("thumb", cropped);
 				  })
 */
-// 			}
+			}
 			
 			user.save(null, {
                 useMasterKey: true,
-                success: res.success(httpResponse.text), 
+                success: return 0, 
                 error: function(obj, error) { 
                     res.error(error.message);
                 } 
@@ -66,7 +59,8 @@ exports.loadDataFromFacebook = function(user, res){
 		},function(httpResponse) {
 			// error
 			console.error('Request failed with response code ' + httpResponse.status);
-			res.error(httpResponse);
+// 			res.error(httpResponse);
+			return 1;
 		});
 
 }
